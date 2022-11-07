@@ -5,7 +5,7 @@ const dotenv = require("dotenv");
 const mongoose = require("mongoose");
 const jwt = require("jsonwebtoken")
 const app = express()
-dotenv.config();
+
 app.use((express.json({ limit: "30mb", extended: true})))
 app.use((express.urlencoded({ limit: "30mb", extended: true})))
 app.use((cors()))
@@ -14,7 +14,6 @@ const userSchema = new mongoose.Schema(
     { email: String, password: String, name : String , token: String }
 )
 const User = mongoose.model('User', userSchema);
-//SEND PDF INVOICE VIA EMAIL
 app.get('/', (req, res) => {
     res.send('SERVER IS RUNNING')
   })
@@ -26,7 +25,6 @@ app.get('/delete',async(req,res)=>{
             res.status(200).json({message: "Something went wrong"})
     }
 })
-//   api-endpoint https://invoice-app-server.herokuapp.com/
 app.get('/user', async(req,res)=>{
     try {
         const userData = await User.find()
